@@ -1,8 +1,8 @@
 var friends = [
 {
-    "name":"Chimelle",
-    "photo":"http://2.bp.blogspot.com/-89EDYZgqUe8/TWRnqvwwtoI/AAAAAAAAA-0/eATShLwHX0o/s1600/Elephant_1-6128.jpg",
-    "scores":[
+    name:"Chimelle",
+    photo:"https://goo.gl/images/YVBgb1",
+    scores:[
         5,
         1,
         4,
@@ -16,9 +16,9 @@ var friends = [
       ]
   },
   {
-    "name":"Shaniqua",
-    "photo":"https://tse3.mm.bing.net/th?id=OIP.C6ZBV67Kdx8tEcDXPidFfwHaFb&pid=15.1&P=0&w=218&h=161",
-    "scores":[
+    name:"Shaniqua",
+    photo:"https://goo.gl/images/efo1JE",
+    scores:[
         2,
         4,
         3,
@@ -32,9 +32,9 @@ var friends = [
       ]
   },
   {
-    "name":"Earl",
-    "photo":"https://tse4.mm.bing.net/th?id=OIP.4N_ANfHWFkNRtv1p9JPcTgHaHa&pid=15.1&P=0&w=300&h=300",
-    "scores":[
+    name:"Earl",
+    photo:"https://goo.gl/images/psVzA4",
+    scores:[
         4,
         3,
         4,
@@ -48,9 +48,9 @@ var friends = [
       ]
   },
   {
-    "name":"Tre",
-    "photo":"https://tse2.mm.bing.net/th?id=OIP.rPtpyivnHWwTij3hVlZ51QHaE6&pid=15.1&P=0&w=270&h=180",
-    "scores":[
+    name:"Tre",
+    photo:"https://goo.gl/images/nToVb2",
+    scores:[
         4,
         4,
         4,
@@ -64,9 +64,9 @@ var friends = [
       ]
   },
   {
-    "name":"Tyeshia",
-    "photo":"https://tse1.mm.bing.net/th?id=OIP.V2UWpJkvD5q3YR_q4IYVHQHaEK&pid=15.1&P=0&w=284&h=161",
-    "scores":[
+    name:"Tyeshia",
+    photo:"https://goo.gl/images/ZteYqG",
+    scores:[
         3,
         2,
         3,

@@ -13,14 +13,8 @@ module.exports = function(app){
 	});
 
 	//GETs the Friends API page
-	app.get('/api/friends', function(req, res){
-		return res.json(friend);	
+	app.get('/', function(req, res){
+		res.sendFile(path.join(__dirname + '/../public/home.html'));	
 	});
-
-
-	// If no matching route is found the USE request defaults to the home page
-	app.use(function(req, res){
-		res.sendFile(path.join(__dirname + '/../public/home.html'));
-	});
-
+	
 }

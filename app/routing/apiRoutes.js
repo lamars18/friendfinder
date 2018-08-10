@@ -1,58 +1,44 @@
-//Loads the required NPM Packages 
-var friends 	= require('../data/friends.js');
-var path 		= require('path');
+var friendsData = require("../data/friends.js");
+
+module.exports = function (app) {
+
+    app.get("/api/friends", function (req, res) {
+        res.json(friendsData);
+    });
+
+    app.post("/api/friends", function (req, res) {
 
 
-	// Export API routes
-	module.exports = function(app) {
-	// console.log('___ENTER apiRoutes.js___');
+        var perfectMatch = {
+            name: "",
+            photo: "",
+            difference: 999
+        };
 
-	// Total list of friend entries
-	app.get('/api/friends', function(req, res) {
-		res.json(friends);
-	});
+        var userData = req.body;
+        var userScores = userData.scores;
 
-	// Add new friend entry
-	app.post('/api/friends', function(req, res) {
-		// Capture the user input object
-		var userInput = req.body;
-		// console.log('userInput = ' + JSON.stringify(userInput));
+        for (var i = 0; i < friendsData.length; i++) {
 
-		var userResponses = userInput.scores;
-		// console.log('userResponses = ' + userResponses);
+            totalDifference = 0;
 
-		// Compute best friend match
-		var matchName = '';
-		var matchImage = '';
-		var totalDifference = 10000; // Make the initial value big for comparison
+            for (var j = 0; j < friendsData[i].scores[j]; j++) {
 
-		// Examine all existing friends in the list
-		for (var i = 0; i < friends.length; i++) {
-			// console.log('friend = ' + JSON.stringify(friends[i]));
+                totalDifference += Math.abs(userScores[j] - friendsData[i].scores[j]);
 
-			// Compute differenes for each question
-			var diff = 0;
-			for (var j = 0; j < userResponses.length; j++) {
-				diff += Math.abs(friends[i].scores[j] - userResponses[j]);
-			}
-			// console.log('diff = ' + diff);
+                if (totalDifference <= perfectMatch.difference) {
 
-			// If lowest difference, record the friend match
-			if (diff < totalDifference) {
-				// console.log('Closest match found = ' + diff);
-				// console.log('Friend name = ' + friends[i].name);
-				// console.log('Friend image = ' + friends[i].photo);
+                    perfectMatch.name = friendsData[i].name;
+                    perfectMatch.photo = friendsData[i].photo;
+                    perfectMatch.difference = totalDifference;
+                }
+            }
+        }
 
-				totalDifference = diff;
-				matchName = friends[i].name;
-				matchImage = friends[i].photo;
-			}
-		}
+        friendsData.push(userData);
 
-		// Add new user
-		friends.push(userInput);
+        res.json(perfectMatch);
 
-		// Send appropriate response
-		res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
-	});
-};
+    });
+
+}

@@ -5,21 +5,12 @@
   <meta charset="UTF-8">
   <title>The Friend Finder</title>
   
-  <!-- Link to the jQuery Library -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS & JS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/95F050B6-D80F-FA40-9C2E-205256C87BB7/main.js" charset="UTF-8"></script><script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-  <!-- Font Awesome Glyphicons -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
-  <!-- Chosen -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -182,7 +173,7 @@
 	      </div>
 	      <div class="modal-body">
 	        <h2 id="matchName"></h2>
-	        <img id="matchImg" src="" alt="">
+	        <img id="matchImg">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -192,21 +183,10 @@
 	  </div>
 	</div>
 
-<!-- //This section sends form data to our server -->
+<!-- //This section sends form data to server on submit-->
 
   <script type="text/javascript">
-  	// Chosen CSS
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-      '.chosen-select-width'     : {width:"95%"}
-    }
-    for (var selector in config) {
-      $(selector).chosen(config[selector]);
-    }
-    // Capture the form inputs 
+  
     $("#submit").on("click", function(){
     	// Form validation
     	function validateForm() {
@@ -221,21 +201,25 @@
 		  })
 		  return isValid;
 		}
-		// If all required fields are filled
+		 //If all required fields are filled
 		if (validateForm() == true)
 		{
 			// Create an object for the user's data
 	    	var userData = {
 	    		name: $("#name").val(),
-	    		photo: $("#photo").val(),
-	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
+          photo: $("#photo").val(),
+          //converts user responses into an array
+	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
 	    	}
-	    	// Grab the URL of the website
-	    	var currentURL = window.location.origin;
+	    	
 	    	// AJAX post the data to the friends API. 
-	    	$.post("/api/friends", userData, function(data){
+        $.post("/api/friends", userData)
+        .then(function(data){
 	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
-	    		$("#matchName").text(data.name);
+          //var name = friends.name;
+          //var photo = friends.photo; 
+
+          $("#matchName").text(data.name);
 	    		$('#matchImg').attr("src", data.photo);
 		    	// Show the modal with the best match 
 		    	$("#resultsModal").modal('toggle');
@@ -248,6 +232,9 @@
     	
     	return false;
     });
+
+   
+   
   </script>
 
 
